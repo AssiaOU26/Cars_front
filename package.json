@@ -19,13 +19,14 @@
     "dev": "vite --port 3001",
     "build": "vite build",
     "preview": "vite preview",
-    "vercel-build": "vite build",
+    "vercel-build": "node vercel-build.js",
     "railway:install": "npm install --omit=optional",
     "railway:build": "node build.js"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
+    "esbuild": "^0.24.2",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.14",
     "terser": "^5.36.0",

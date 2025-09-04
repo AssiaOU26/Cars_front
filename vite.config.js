@@ -35,6 +35,9 @@ export default defineConfig({
         }
     },
     optimizeDeps: {
-        exclude: ['@rollup/rollup-win32-x64-msvc']
+        exclude: ['@rollup/rollup-win32-x64-msvc', '@rollup/rollup-linux-x64-gnu']
+    },
+    define: {
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
     }
 })
