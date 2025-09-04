@@ -19,11 +19,11 @@
     "dev": "vite --port 3001",
     "build": "vite build",
     "preview": "vite preview",
+    "vercel-build": "vite build",
     "railway:install": "npm install --omit=optional",
     "railway:build": "node build.js"
   },
   "devDependencies": {
-    "@rollup/rollup-win32-x64-msvc": "^4.50.0",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",

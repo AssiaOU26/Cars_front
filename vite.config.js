@@ -33,5 +33,8 @@ export default defineConfig({
                 }
             }
         }
+    },
+    optimizeDeps: {
+        exclude: ['@rollup/rollup-win32-x64-msvc']
     }
 })
