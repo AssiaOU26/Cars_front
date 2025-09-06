@@ -3,7 +3,7 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "env": {
-    "VITE_API_BASE": "https://cars-back-one.vercel.app"
+    "VITE_API_BASE": "https://cars-back-seven.vercel.app"
   },
   "rewrites": [
     {
