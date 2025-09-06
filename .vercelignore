@@ -1,4 +1,4 @@
-node_modules
-build.js
-railway.json
-railway-docker.json
+node_modules/@rollup/rollup-win32-x64-msvc
+node_modules/.vite
+dist
+.env.local
