@@ -8,6 +8,7 @@ import {
   deleteRequest,
   fetchUsers,
   updateUserStatus,
+  updateUserRole,
   updateRequestStatus,
 } from "../api";
 import ContactCrudModal from "./ContactCrudModal";
@@ -122,6 +123,37 @@ function SuperAdminView() {
       await toast.promise(action, {
         loading: "Updating user status...",
         success: (data) => data.message,
+        error: (err) => err.message,
+      });
+      loadData(); // Refresh the user list
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // --- User Role Handler ---
+  const handleUserRoleUpdate = async (userId, newRole) => {
+    if (currentUser?.id === userId && newRole !== "super_admin") {
+      toast.error("You cannot change your own superadmin role.");
+      return;
+    }
+    const action = updateUserRole(userId, newRole);
+    try {
+      await toast.promise(action, {
+        loading: "Updating user role...",
+        success: (data) => {
+          toast(
+            "User role updated. The user needs to log out and log back in to see changes.",
+            {
+              duration: 5000,
+              style: {
+                background: "#3B82F6",
+                color: "#fff",
+              },
+            }
+          );
+          return "User role updated successfully!";
+        },
         error: (err) => err.message,
       });
       loadData(); // Refresh the user list
@@ -593,6 +625,37 @@ function SuperAdminView() {
                               >
                                 {user.status || "pending"}
                               </span>
+                              <span
+                                className={`text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider ${
+                                  user.role === "super_admin"
+                                    ? "bg-purple-500/20 text-purple-300"
+                                    : user.role === "admin"
+                                    ? "bg-blue-500/20 text-blue-300"
+                                    : "bg-gray-500/20 text-gray-300"
+                                }`}
+                              >
+                                {user.role || "user"}
+                              </span>
+                              {currentUser?.id !== user.id && (
+                                <div className="flex items-center gap-2">
+                                  <select
+                                    value={user.role || "user"}
+                                    onChange={(e) =>
+                                      handleUserRoleUpdate(
+                                        user.id,
+                                        e.target.value
+                                      )
+                                    }
+                                    className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-neon-blue/50"
+                                  >
+                                    <option value="user">User</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="super_admin">
+                                      Super Admin
+                                    </option>
+                                  </select>
+                                </div>
+                              )}
                               {currentUser?.id !== user.id &&
                                 user.status === "active" && (
                                   <button

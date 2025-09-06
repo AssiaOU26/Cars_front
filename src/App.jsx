@@ -14,6 +14,29 @@ function Dashboard() {
   const { t } = useTranslation();
 
   const getViewForRole = () => {
+    // Check if user is pending approval
+    if (user?.status === "pending") {
+      return (
+        <div className="ios-card max-w-2xl mx-auto mt-20 text-center">
+          <div className="w-20 h-20 mx-auto bg-ios-warning rounded-full flex items-center justify-center mb-6">
+            <i className="fas fa-clock text-white text-2xl"></i>
+          </div>
+          <h2 className="text-2xl font-bold text-theme-text mb-4">
+            {t("auth.pending_approval", {
+              defaultValue: "Account Pending Approval",
+            })}
+          </h2>
+          <p className="text-theme-text-secondary text-lg">
+            {t("auth.pending_message", {
+              defaultValue:
+                "Your account is pending approval from a super administrator. You'll receive access once approved.",
+            })}
+          </p>
+        </div>
+      );
+    }
+
+    // Check user role for active users
     switch (user?.role) {
       case "super_admin":
         return <SuperAdminView />;

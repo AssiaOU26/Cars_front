@@ -43,7 +43,7 @@ async function apiCall(endpoint, options = {}) {
 
 // --- API Functions ---
 
-export function fetchRequests(params = undefined) {
+export async function fetchRequests(params = undefined) {
     let queryString = '';
     if (params && (params.status || params.q || params.limit || params.offset)) {
         const search = new URLSearchParams();
@@ -53,15 +53,25 @@ export function fetchRequests(params = undefined) {
         if (params.offset) search.set('offset', String(params.offset));
         queryString = `?${search.toString()}`;
     }
-    return apiCall(`/api/requests${queryString}`);
+    const result = await apiCall(`/api/requests${queryString}`);
+    // Normalize: server may return { requests: [...] } or [...] directly
+    if (Array.isArray(result)) return result;
+    if (result && Array.isArray(result.requests)) return result.requests;
+    return [];
 }
 
-export function fetchContacts() {
-    return apiCall('/api/contacts');
+export async function fetchContacts() {
+    const result = await apiCall('/api/contacts');
+    return Array.isArray(result) ? result : [];
 }
 
-export function fetchUsers() {
-    return apiCall('/api/users');
+export async function fetchUsers() {
+    const result = await apiCall('/api/users');
+    return Array.isArray(result) ? result : [];
+}
+
+export function fetchAssignments() {
+    return apiCall('/api/assignments');
 }
 
 export function submitAssignment(assignmentData) {
@@ -125,8 +135,22 @@ export function updateUserStatus(userId, status) {
     });
 }
 
-export function fetchOverviewStats() {
-    return apiCall('/api/stats/overview');
+export function updateUserRole(userId, role) {
+    return apiCall(`/api/users/${userId}/role`, {
+        method: 'PUT',
+        body: JSON.stringify({ role }),
+    });
+}
+
+export async function fetchOverviewStats() {
+    const stats = await apiCall('/api/stats/overview');
+    // Ensure all fields exist for UI
+    return {
+        totalRequests: stats?.totalRequests ?? 0,
+        submitted: stats?.submitted ?? stats?.pendingRequests ?? 0,
+        inProgress: stats?.inProgress ?? 0,
+        completed: stats?.completed ?? stats?.completedRequests ?? 0,
+    };
 }
 
 export function fetchMe() {

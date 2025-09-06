@@ -31,18 +31,20 @@ body {
 [data-theme="light"] {
     --bg-primary: #FF6B35;
     --bg-secondary: #FF8A65;
-    --bg-elevated: rgba(255, 255, 255, 0.95);
-    --border-color: rgba(0, 0, 0, 0.1);
+    --bg-elevated: rgba(255, 255, 255, 0.98);
+    --bg-surface: rgba(255, 255, 255, 0.95);
+    --border-color: rgba(0, 0, 0, 0.15);
     --text-primary: #1d1d1f;
-    --text-secondary: #6e6e73;
-    --text-tertiary: #86868b;
+    --text-secondary: #424245;
+    --text-tertiary: #6e6e73;
 }
 
 [data-theme="dark"] {
     --bg-primary: #000000;
     --bg-secondary: #1c1c1e;
-    --bg-elevated: rgba(44, 44, 46, 0.95);
-    --border-color: rgba(255, 255, 255, 0.1);
+    --bg-elevated: rgba(28, 28, 30, 0.98);
+    --bg-surface: rgba(44, 44, 46, 0.95);
+    --border-color: rgba(255, 255, 255, 0.15);
     --text-primary: #ffffff;
     --text-secondary: #ebebf5;
     --text-tertiary: #ebebf599;
@@ -361,4 +363,160 @@ body {
 *:focus-visible {
     outline: 2px solid var(--ios-primary);
     outline-offset: 2px;
+}
+
+/* ==== THEME UTILITY CLASSES ==== */
+.text-theme-text {
+    color: var(--text-primary) !important;
+}
+
+.text-theme-text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-theme-text-tertiary {
+    color: var(--text-tertiary) !important;
+}
+
+.bg-theme-surface {
+    background: var(--bg-surface) !important;
+}
+
+.bg-theme-elevated {
+    background: var(--bg-elevated) !important;
+}
+
+.border-theme-border {
+    border-color: var(--border-color) !important;
+}
+
+/* ==== GLASS EFFECT ==== */
+.glass-effect {
+    background: var(--bg-elevated);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .glass-effect {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ==== NEON COLORS ==== */
+.neon-blue {
+    color: #00D4FF;
+}
+
+.neon-green {
+    color: #00FF88;
+}
+
+.neon-purple {
+    color: #B347FF;
+}
+
+.neon-orange {
+    color: #FF6B35;
+}
+
+/* ==== BUTTON VARIANTS ==== */
+.btn-neon-blue {
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: #00D4FF;
+}
+
+.btn-neon-green {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #00FF88;
+}
+
+.btn-neon-purple {
+    background: rgba(179, 71, 255, 0.1);
+    border: 1px solid rgba(179, 71, 255, 0.3);
+    color: #B347FF;
+}
+
+.btn-neon-orange {
+    background: rgba(255, 107, 53, 0.1);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    color: #FF6B35;
+}
+
+/* ==== HOVER STATES ==== */
+.btn-neon-blue:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: rgba(0, 212, 255, 0.5);
+}
+
+.btn-neon-green:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: rgba(0, 255, 136, 0.5);
+}
+
+.btn-neon-purple:hover {
+    background: rgba(179, 71, 255, 0.2);
+    border-color: rgba(179, 71, 255, 0.5);
+}
+
+.btn-neon-orange:hover {
+    background: rgba(255, 107, 53, 0.2);
+    border-color: rgba(255, 107, 53, 0.5);
+}
+
+/* ==== FALLBACK TEXT VISIBILITY ==== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-primary) !important;
+}
+
+p,
+span,
+div {
+    color: var(--text-primary);
+}
+
+/* ==== FORM ELEMENTS ==== */
+input,
+textarea,
+select {
+    color: var(--text-primary) !important;
+    background: var(--bg-elevated) !important;
+    border-color: var(--border-color) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-tertiary) !important;
+}
+
+/* ==== MODAL OVERLAYS ==== */
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="light"] .modal-overlay {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ==== CARD CONTENT ==== */
+.card-content {
+    color: var(--text-primary) !important;
+}
+
+.card-title {
+    color: var(--text-primary) !important;
+}
+
+.card-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+.card-description {
+    color: var(--text-tertiary) !important;
 }
