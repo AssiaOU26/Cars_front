@@ -1,4 +1,2 @@
-node_modules/@rollup/rollup-win32-x64-msvc
 node_modules/.vite
-dist
 .env.local

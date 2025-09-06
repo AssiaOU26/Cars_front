@@ -24,7 +24,7 @@
     "railway:build": "node build.js"
   },
   "devDependencies": {
-    "@rollup/rollup-win32-x64-msvc": "^4.50.0",
+    "@rollup/rollup-linux-x64-gnu": "^4.50.0",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "esbuild": "^0.25.9",
